@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[32]:
+# In[2]:
 
 
 import random
@@ -172,20 +172,20 @@ class ReinforcementLearning(object):
         self.Epoch = Epoch 
         #self.create_network()
         CRate = np.zeros(Epoch,dtype=np.float32) 
-        #for epoch in range(self.Epoch):
+        for epoch in range(self.Epoch):
            # if epoch% 100 == 0:
-        self.create_network()
+            self.create_network()
 
-        self.computePayoff()
-        self.computeReward()
-        self.computeQvalue()
-        self.updatePi()
-        self.computeCLevel()
-        CRate[epoch] = self.cooperationLevel
-        #print('cooperation level is %f' % self.cooperationLevel) 
-        #sys.stdout.write('\r Iteration: %d/%d \t Epoch: %d/%d \t Cooperation proportion: %2f' % (r+1,100,epoch+1,rounds,CRate))  
-        #sys.stdout.flush()
-        print(self.cooperationLevel)
+            self.computePayoff()
+            self.computeReward()
+            self.computeQvalue()
+            self.updatePi()
+            self.computeCLevel()
+            CRate[epoch] = self.cooperationLevel
+            #print('cooperation level is %f' % self.cooperationLevel) 
+            #sys.stdout.write('\r Iteration: %d/%d \t Epoch: %d/%d \t Cooperation proportion: %2f' % (r+1,100,epoch+1,rounds,CRate))  
+            #sys.stdout.flush()
+            print(self.cooperationLevel)
         return CRate
             #print(self.payoffs)
             #print(self.Reward)
@@ -195,7 +195,7 @@ class ReinforcementLearning(object):
         
 
 
-# In[35]:
+# In[3]:
 
 
 mu = 0.01
@@ -225,7 +225,7 @@ cooperation_rate=create_result_set(nets, rules, gtypes, epoch)
 #np.zeros(epoch,dtype=np.float32) 
 
 
-# In[36]:
+# In[4]:
 
 
 for net in nets:
