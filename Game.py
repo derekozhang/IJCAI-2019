@@ -8,7 +8,7 @@ from Network import Network
 import sys
 
 class Game(object):
-    def __init__(self,number,rule,fracC,fracM, net, gameType="Normal"):
+    def __init__(self,number,rule,fracC,fracM, net, gameType):
         """
         number: number of agents
         rule: IBN, IBS and Redistribution
@@ -33,15 +33,23 @@ class Game(object):
         if gameType == "Malicious":
             self.MalicAgent = np.array(sorted(random.sample(range(number),int(fracM*number))))
     
+    #def create_network(self):
+        #network = Network(self.number, 4, self.net)
+        #Matrix = network.dynamic_networks(10)
+        #self.Matrix = Matrix
+        #for i in range(self.number):
+            #self.neighbors[i] = list(np.reshape(np.argwhere(self.Matrix[i] == 1),(1,-1)) [0]) 
+            
+        #return self.Matrix
+     
     def create_network(self):
         network = Network(self.number, 4, self.net)
-        Matrix = network.dynamic_networks(10)
+        Matrix = network.generateNetworks()
         self.Matrix = Matrix
         for i in range(self.number):
             self.neighbors[i] = list(np.reshape(np.argwhere(self.Matrix[i] == 1),(1,-1)) [0]) 
             
         return self.Matrix
-        
         
     
     
@@ -154,7 +162,7 @@ class Game(object):
         self.strategy = s
 
     def cheat(self):
-        cheatPayoff = selfW.payoff.copy()
+        cheatPayoff = self.payoff.copy()
         malicStrategy = self.strategy[self.MalicAgent]
         
         CMali = np.argwhere(malicStrategy=='r')
@@ -169,8 +177,8 @@ class Game(object):
         CRate = np.zeros(rounds,dtype=np.float32)
         for i in range(rounds):    
             
-            if i% 100 == 0:
-                self.create_network()
+            #if i% 100 == 0:
+            self.create_network()
             
             self.getPayoff()
             if self.gameType == "Malicious":
